@@ -1,0 +1,26 @@
+
+<div class="row">
+
+    <a  style="cursor: pointer;" 
+    routerLinkActive="active"
+    [routerLink]="[index]" 
+    class="col-12 list-group-item mb-1 text-dark" >
+        <div class="d-flex justify-content-between mb-2">
+           <div>
+                <h4  class="">{{recipe.name}}</h4>
+                <p class="">{{recipe.description}}</p>
+            </div>
+            <div>
+                <img 
+                src="{{recipe.imagePath}}"
+                alt="{{recipe.name}}"
+                class="img-fluid"
+                style="width: 100px; height: 100px;"
+                >
+            </div>
+
+        </div>
+
+    </a>
+   
+</div>

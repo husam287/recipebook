@@ -1,0 +1,45 @@
+
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <img src="{{recipe.imagePath}}" alt="{{recipe.name}}" style="max-height: 300px;">
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <h1>{{recipe.name}}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <p>{{recipe.description}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <ul class="list-group mb-3">
+            <li 
+            class="list-group-item" 
+            *ngFor="let ingred of recipe.ingredients">{{ingred.name}}-{{ingred.amount}}</li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Recipe Manage
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item"  style="cursor: pointer;" (click)="sendToShopList(recipe.ingredients)">To shop list</a>
+                <a class="dropdown-item" [routerLink]="['edit']" style="cursor: pointer;">Edit recipes</a>
+                <a class="dropdown-item"  style="cursor: pointer;" (click)="deleteRecipe()">Delete resipes</a>
+            </div>
+          </div>
+         
+    </div>
+</div>
+
+
+
+
+  
