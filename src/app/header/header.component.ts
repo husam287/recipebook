@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { RecipeService } from '../shared/recipes.service';
 
 
 
@@ -10,11 +11,16 @@ import { Component, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   
-    constructor() { }
+    constructor(private recipesService:RecipeService) { }
 
     ngOnInit(): void { }
 
-  
+    saveData(){
+      this.recipesService.sentRecipesToServer();
+    }
+    fetchData(){
+      this.recipesService.receiveRecipesFromServer().subscribe();
+    }
 
   }
 

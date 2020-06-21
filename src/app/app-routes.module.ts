@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RecipesDetailsComponent } from './recipes/recipes-details/recipes-details.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipesResolver } from './shared/recipesResolver.service';
 
 const appRouting:Routes=[
     {path:'',redirectTo:'recipes',pathMatch:'full'},
@@ -12,8 +13,8 @@ const appRouting:Routes=[
     {path:'recipes',component:RecipesComponent,
     children:[  {path:'',component:RecipeStartComponent},
                 {path:'new',component:RecipeEditComponent},
-                {path:':id',component:RecipesDetailsComponent},
-                {path:':id/edit',component:RecipeEditComponent}
+                {path:':id',component:RecipesDetailsComponent,resolve:[RecipesResolver]},
+                {path:':id/edit',component:RecipeEditComponent,resolve:[RecipesResolver]}
 
      
                     
