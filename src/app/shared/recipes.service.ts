@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { map,tap } from 'rxjs/operators';
+import { map,tap, take, exhaustMap } from 'rxjs/operators';
 
 import{ recipe } from '../recipes/recipe.model'
 import { ingredient } from './ingredients.model';
+import { AuthService } from '../auth/auth.service';
 
 
 @Injectable({providedIn:'root'})
@@ -26,7 +27,7 @@ export class RecipeService{
         
   //     ];
   private recipes:recipe[]=[];
-constructor(private http:HttpClient){}
+constructor(private http:HttpClient,private authService:AuthService){}
 
       sentRecipesToServer(){
         this.http.put('https://recipebook-fe6b3.firebaseio.com/recipes.json',this.getRecipes())
@@ -34,19 +35,16 @@ constructor(private http:HttpClient){}
           console.log(response);
         })
       }
-      receiveRecipesFromServer(){
-        return this.http.get<recipe[]>('https://recipebook-fe6b3.firebaseio.com/recipes.json')
-        .pipe(map(response=>{
-          return response.map(recipe1=>{
-           return {...recipe1 , ingredients: recipe1.ingredients? recipe1.ingredients :[]}
-          })
-        }),
-        tap(response=>{
-          this.setRecipes(response);
-
-        })
-        )
-        
+      receiveRecipesFromServer(){      
+      return this.http.get<recipe[]>('https://recipebook-fe6b3.firebaseio.com/recipes.json')   
+          .pipe( 
+          map(response=>{
+              return response.map(recipe1=>{
+               return {...recipe1 , ingredients: recipe1.ingredients? recipe1.ingredients :[]}
+              })
+            }),
+          tap(response=>{this.setRecipes(response);})
+              )  
       }
 
 

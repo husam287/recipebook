@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ShopListService } from './shared/shopList.service'
+import { AuthService } from './auth/auth.service';
 
 
 
@@ -10,13 +11,11 @@ import {ShopListService } from './shared/shopList.service'
   providers:[ShopListService]
 
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'shop-app';
-
-  showComponet:string;
-
-  recipesOrList(choise:string){
-    this.showComponet=choise;
-    
+constructor(private authService:AuthService){}
+  ngOnInit(){
+    this.authService.autoLogin();
   }
+  
 }
